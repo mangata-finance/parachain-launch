@@ -20,6 +20,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc --build tsconfig.json",
     "lint": "polkadot-dev-run-lint",
     "start": "ts-node src/index.ts"
