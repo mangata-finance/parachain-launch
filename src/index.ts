@@ -352,7 +352,9 @@ const generateParachainGenesisFile = (
 
   if (chain.collators) {
     const invulnerables = chain.collators.map(getAddress);
-    setParachainRuntimeValue(runtime, 'collatorSelection', { invulnerables: invulnerables });
+    if (!chain.disablePallets?.includes('collatorSelection')) {
+      setParachainRuntimeValue(runtime, 'collatorSelection', { invulnerables: invulnerables });
+    }
     setParachainRuntimeValue(runtime, 'session', {
       keys: chain.collators.map((x) => {
         const addr = getAddress(x);
@@ -379,7 +381,9 @@ const generateParachainGenesisFile = (
     for (const addr of endowed) {
       balObj[addr] = (balObj[addr] || 0) + Math.pow(10, decimals) * 1000;
     }
-    setParachainRuntimeValue(runtime, 'balances', { balances: Object.entries(balObj) });
+    if (!chain.disablePallets?.includes('balances')) {
+      setParachainRuntimeValue(runtime, 'balances', { balances: Object.entries(balObj) });
+    }
   }
 
   if (chain.runtimeGenesisConfig) {

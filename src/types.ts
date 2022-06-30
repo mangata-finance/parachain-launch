@@ -39,6 +39,7 @@ export interface Chain {
     parachainInfo?: { parachainId: number };
     [key: string]: any;
   };
+  disablePallets?: string[];
 }
 
 export interface Node {
